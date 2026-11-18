@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Application log summary | September 10, 2026</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202a32;
+      --muted: #596970;
+      --paper: #f5f6f2;
+      --surface: #fff;
+      --line: #d7ded9;
+      --green: #245c4b;
+      --green-soft: #e7f1ec;
+      --amber: #80510b;
+      --amber-soft: #fff2d6;
+      --red: #922f29;
+      --red-soft: #fbe9e5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.55 Georgia, "Times New Roman", serif;
+    }
+    main { width: min(860px, calc(100% - 36px)); margin: 48px auto; }
+    header { border-top: 5px solid var(--green); padding: 22px 0 24px; }
+    .eyebrow, time, .tag, .meta { font-family: Arial, Helvetica, sans-serif; }
+    .eyebrow { color: var(--green); font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    h1 { margin: 8px 0; font-size: clamp(30px, 6vw, 44px); line-height: 1.08; }
+    .meta { margin: 0; color: var(--muted); font-size: 14px; }
+    h2 { margin: 30px 0 12px; font-size: 22px; }
+    .overview { padding: 18px 20px; background: var(--green-soft); border-left: 4px solid var(--green); }
+    .overview p { margin: 0; }
+    .overview p + p { margin-top: 9px; }
+    .events { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .events li { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 14px 12px; border-bottom: 1px solid var(--line); background: var(--surface); }
+    .events li.error { background: var(--red-soft); }
+    .events li.warning { background: var(--amber-soft); }
+    time { padding-top: 2px; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+    .tag { display: inline-block; margin-right: 7px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+    .error .tag { color: var(--red); }
+    .warning .tag { color: var(--amber); }
+    .events p { margin: 0; }
+    .note { margin-top: 22px; padding: 14px 16px; border: 1px solid var(--line); color: var(--muted); background: var(--surface); font-size: 14px; }
+    footer { margin-top: 20px; color: var(--muted); font: 13px/1.5 Arial, Helvetica, sans-serif; }
+    @media (max-width: 520px) {
+      main { width: min(100% - 24px, 860px); margin: 24px auto; }
+      .events li { grid-template-columns: 1fr; gap: 3px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Operations report</div>
+      <h1>What happened overnight</h1>
+      <p class="meta">alerts-api · September 10, 2026 · 02:14–04:15</p>
+    </header>
+
+    <section class="overview" aria-label="Summary">
+      <p>The service started normally and handled several alert requests successfully. During the same window, five explanation requests failed with the same error: the application tried to call <code>upper()</code> on a missing value. Each failure was followed by a retry notice, but this log slice does not show how those retries ended.</p>
+      <p>There was also one alert lookup that returned “not found.” The database connection pool was reported at 82% capacity, then later at 91%, indicating increased pressure.</p>
+    </section>
+
+    <h2>Timeline</h2>
+    <ol class="events">
+      <li><time datetime="2026-09-10T02:14:01">02:14:01</time><p><span class="tag">Normal</span>The alerts service finished starting up.</p></li>
+      <li><time datetime="2026-09-10T02:15:33">02:15:33</time><p><span class="tag">Normal</span>A new alert was created successfully.</p></li>
+      <li><time datetime="2026-09-10T02:17:02">02:17:02</time><p><span class="tag">Normal</span>An explanation was returned successfully for alert 1.</p></li>
+      <li class="error"><time datetime="2026-09-10T02:22:18">02:22:18</time><p><span class="tag">Error</span>Explaining alert 2 failed with a server error: the code tried to use <code>upper()</code> on a <code>None</code> value.</p></li>
+      <li class="error"><time datetime="2026-09-10T02:22:19">02:22:19</time><p><span class="tag">Retry</span>The service logged retry attempt 2 of 3 for that request. No final result is shown.</p></li>
+      <li><time datetime="2026-09-10T02:31:47">02:31:47</time><p><span class="tag">Normal</span>An explanation was returned successfully for alert 3.</p></li>
+      <li class="error"><time datetime="2026-09-10T02:44:09">02:44:09</time><p><span class="tag">Error</span>Explaining alert 7 failed with the same <code>None</code> and <code>upper()</code> error.</p></li>
+      <li class="error"><time datetime="2026-09-10T02:44:10">02:44:10</time><p><span class="tag">Retry</span>Retry attempt 2 of 3 was logged; the eventual outcome is not present.</p></li>
+      <li class="warning"><time datetime="2026-09-10T02:58:22">02:58:22</time><p><span class="tag">Warning</span>The database connection pool reached 82% capacity.</p></li>
+      <li><time datetime="2026-09-10T03:05:41">03:05:41</time><p><span class="tag">Normal</span>An explanation was returned successfully for alert 9.</p></li>
+      <li class="error"><time datetime="2026-09-10T03:12:56">03:12:56</time><p><span class="tag">Error</span>Explaining alert 11 failed with the same <code>None</code> and <code>upper()</code> error.</p></li>
+      <li class="error"><time datetime="2026-09-10T03:12:57">03:12:57</time><p><span class="tag">Retry</span>Retry attempt 2 of 3 was logged; the eventual outcome is not present.</p></li>
+      <li class="error"><time datetime="2026-09-10T03:20:03">03:20:03</time><p><span class="tag">Not found</span>A request for alert 14 returned 404 because the alert was not found. The log does not explain why it was missing.</p></li>
+      <li><time datetime="2026-09-10T03:33:19">03:33:19</time><p><span class="tag">Normal</span>An explanation was returned successfully for alert 15.</p></li>
+      <li class="error"><time datetime="2026-09-10T03:41:52">03:41:52</time><p><span class="tag">Error</span>Explaining alert 18 failed with the same <code>None</code> and <code>upper()</code> error.</p></li>
+      <li class="error"><time datetime="2026-09-10T03:41:53">03:41:53</time><p><span class="tag">Retry</span>Retry attempt 2 of 3 was logged; the eventual outcome is not present.</p></li>
+      <li class="warning"><time datetime="2026-09-10T03:50:07">03:50:07</time><p><span class="tag">Warning</span>The database connection pool was now at 91% capacity, up from 82% earlier.</p></li>
+      <li class="error"><time datetime="2026-09-10T04:02:31">04:02:31</time><p><span class="tag">Error</span>Explaining alert 21 failed with the same <code>None</code> and <code>upper()</code> error.</p></li>
+      <li class="error"><time datetime="2026-09-10T04:02:32">04:02:32</time><p><span class="tag">Retry</span>Retry attempt 2 of 3 was logged; the eventual outcome is not present.</p></li>
+      <li><time datetime="2026-09-10T04:15:44">04:15:44</time><p><span class="tag">Normal</span>An explanation was returned successfully for alert 23.</p></li>
+    </ol>
+
+    <p class="note"><strong>Notable pattern:</strong> The explanation failures recur about every 20–30 minutes and share an identical error, suggesting a repeated application-side input or handling problem. The log alone cannot confirm the exact cause or whether the retries recovered.</p>
+    <footer>Source: the supplied application log slice. Times are reproduced as logged.</footer>
+  </main>
+</body>
+</html>

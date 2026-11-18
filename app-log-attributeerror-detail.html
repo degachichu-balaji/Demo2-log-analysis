@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AttributeError details from app.log</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202a32;
+      --muted: #596970;
+      --paper: #f5f6f2;
+      --surface: #fff;
+      --line: #d7ded9;
+      --red: #922f29;
+      --red-soft: #fbe9e5;
+      --green: #245c4b;
+      --green-soft: #e7f1ec;
+      --amber: #80510b;
+      --amber-soft: #fff2d6;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 Georgia, "Times New Roman", serif; }
+    main { width: min(860px, calc(100% - 36px)); margin: 48px auto; }
+    header { border-top: 5px solid var(--red); padding: 22px 0 24px; }
+    .eyebrow, table, .meta { font-family: Arial, Helvetica, sans-serif; }
+    .eyebrow { color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    h1 { margin: 8px 0; font-size: clamp(30px, 5vw, 42px); line-height: 1.1; }
+    .meta { margin: 0; color: var(--muted); font-size: 14px; }
+    .error-message { margin: 18px 0 28px; padding: 14px 16px; border-left: 4px solid var(--red); background: var(--red-soft); overflow-wrap: anywhere; }
+    h2 { margin: 28px 0 12px; font-size: 22px; }
+    .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+    th, td { padding: 13px 15px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: #e9eeea; color: #394a4e; font-size: 12px; letter-spacing: .5px; text-transform: uppercase; }
+    tbody tr:last-child td { border-bottom: 0; }
+    td.id { font-weight: 700; }
+    td.time { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .retry { color: var(--green); font-weight: 700; }
+    .finding { margin-top: 22px; padding: 17px 19px; background: var(--amber-soft); border-left: 4px solid var(--amber); }
+    .finding p { margin: 0; }
+    .finding p + p { margin-top: 9px; }
+    .pool-times { color: var(--muted); font: 14px/1.6 Arial, Helvetica, sans-serif; }
+    footer { margin-top: 18px; color: var(--muted); font: 13px/1.5 Arial, Helvetica, sans-serif; }
+    code { font-family: "SFMono-Regular", Consolas, monospace; font-size: .92em; }
+    @media (max-width: 560px) {
+      main { width: min(100% - 24px, 860px); margin: 24px auto; }
+      th, td { padding: 11px 9px; }
+      td.time { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Log evidence · alerts-api</div>
+      <h1>AttributeError occurrences</h1>
+      <p class="meta">September 10, 2026 · all times as recorded in app.log</p>
+    </header>
+
+    <p class="error-message"><strong>Logged error:</strong> <code>AttributeError: 'NoneType' object has no attribute 'upper'</code> on <code>POST /alerts/{id}/explain</code>.</p>
+
+    <h2>Affected alerts and retry entries</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Alert ID</th>
+            <th scope="col">Failure time</th>
+            <th scope="col">Retry followed?</th>
+            <th scope="col">Retry log time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="id">2</td>
+            <td class="time"><time datetime="2026-09-10T02:22:18">02:22:18</time></td>
+            <td class="retry">Yes, attempt 2/3 logged</td>
+            <td class="time"><time datetime="2026-09-10T02:22:19">02:22:19</time></td>
+          </tr>
+          <tr>
+            <td class="id">7</td>
+            <td class="time"><time datetime="2026-09-10T02:44:09">02:44:09</time></td>
+            <td class="retry">Yes, attempt 2/3 logged</td>
+            <td class="time"><time datetime="2026-09-10T02:44:10">02:44:10</time></td>
+          </tr>
+          <tr>
+            <td class="id">11</td>
+            <td class="time"><time datetime="2026-09-10T03:12:56">03:12:56</time></td>
+            <td class="retry">Yes, attempt 2/3 logged</td>
+            <td class="time"><time datetime="2026-09-10T03:12:57">03:12:57</time></td>
+          </tr>
+          <tr>
+            <td class="id">18</td>
+            <td class="time"><time datetime="2026-09-10T03:41:52">03:41:52</time></td>
+            <td class="retry">Yes, attempt 2/3 logged</td>
+            <td class="time"><time datetime="2026-09-10T03:41:53">03:41:53</time></td>
+          </tr>
+          <tr>
+            <td class="id">21</td>
+            <td class="time"><time datetime="2026-09-10T04:02:31">04:02:31</time></td>
+            <td class="retry">Yes, attempt 2/3 logged</td>
+            <td class="time"><time datetime="2026-09-10T04:02:32">04:02:32</time></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section class="finding" aria-label="Database warning evidence">
+      <p><strong>Database pool warnings:</strong> the log reports 82% capacity at 02:58:22 and 91% at 03:50:07.</p>
+      <p><strong>Evidence of cause:</strong> None in this log. It records both the errors and the pool warnings, but does not state that the warnings caused the AttributeErrors or otherwise link them.</p>
+      <p class="pool-times">The retry entries confirm that a retry was initiated; the shown log lines do not report the final result of those retries.</p>
+    </section>
+
+    <footer>Source: app.log only. No cause beyond what is explicitly recorded is inferred.</footer>
+  </main>
+</body>
+</html>

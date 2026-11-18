@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ERROR and WARN summary</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202a32;
+      --muted: #596970;
+      --paper: #f5f6f2;
+      --surface: #fff;
+      --line: #d7ded9;
+      --red: #922f29;
+      --red-soft: #fbe9e5;
+      --amber: #80510b;
+      --amber-soft: #fff2d6;
+      --green: #245c4b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.5 Georgia, "Times New Roman", serif;
+    }
+    main { width: min(1120px, calc(100% - 36px)); margin: 48px auto; }
+    header { border-top: 5px solid var(--green); padding: 22px 0 24px; }
+    .eyebrow, table, .meta { font-family: Arial, Helvetica, sans-serif; }
+    .eyebrow { color: var(--green); font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    h1 { margin: 8px 0; font-size: clamp(30px, 5vw, 42px); line-height: 1.1; }
+    .meta { margin: 0; color: var(--muted); font-size: 14px; }
+    .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+    th, td { padding: 14px 15px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: #e9eeea; color: #394a4e; font-size: 12px; letter-spacing: .5px; text-transform: uppercase; white-space: nowrap; }
+    tbody tr:last-child td { border-bottom: 0; }
+    td.level { width: 88px; font-weight: 700; }
+    .error .level { color: var(--red); background: var(--red-soft); }
+    .warning .level { color: var(--amber); background: var(--amber-soft); }
+    td.count { text-align: center; font-variant-numeric: tabular-nums; }
+    td.time { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    code { font-family: "SFMono-Regular", Consolas, monospace; font-size: .92em; overflow-wrap: anywhere; }
+    footer { margin-top: 16px; color: var(--muted); font: 13px/1.5 Arial, Helvetica, sans-serif; }
+    @media (max-width: 700px) {
+      main { width: min(100% - 24px, 1120px); margin: 24px auto; }
+      th, td { padding: 11px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Log extract · alerts-api</div>
+      <h1>Distinct ERROR and WARN messages</h1>
+      <p class="meta">September 10, 2026 · ordered by first occurrence · alert IDs normalized in endpoint paths</p>
+    </header>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Level</th>
+            <th scope="col">Message</th>
+            <th scope="col">Count</th>
+            <th scope="col">First seen</th>
+            <th scope="col">Last seen</th>
+            <th scope="col">Endpoint</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="error">
+            <td class="level">ERROR</td>
+            <td><code>500 AttributeError: 'NoneType' object has no attribute 'upper'</code></td>
+            <td class="count">5</td>
+            <td class="time"><time datetime="2026-09-10T02:22:18">2026-09-10 02:22:18</time></td>
+            <td class="time"><time datetime="2026-09-10T04:02:31">2026-09-10 04:02:31</time></td>
+            <td><code>POST /alerts/{alert_id}/explain</code></td>
+          </tr>
+          <tr class="warning">
+            <td class="level">WARN</td>
+            <td>Database connection pool at 82% capacity</td>
+            <td class="count">1</td>
+            <td class="time"><time datetime="2026-09-10T02:58:22">2026-09-10 02:58:22</time></td>
+            <td class="time"><time datetime="2026-09-10T02:58:22">2026-09-10 02:58:22</time></td>
+            <td>N/A</td>
+          </tr>
+          <tr class="error">
+            <td class="level">ERROR</td>
+            <td>404 -- Alert not found</td>
+            <td class="count">1</td>
+            <td class="time"><time datetime="2026-09-10T03:20:03">2026-09-10 03:20:03</time></td>
+            <td class="time"><time datetime="2026-09-10T03:20:03">2026-09-10 03:20:03</time></td>
+            <td><code>GET /alerts/{alert_id}</code></td>
+          </tr>
+          <tr class="warning">
+            <td class="level">WARN</td>
+            <td>Database connection pool at 91% capacity</td>
+            <td class="count">1</td>
+            <td class="time"><time datetime="2026-09-10T03:50:07">2026-09-10 03:50:07</time></td>
+            <td class="time"><time datetime="2026-09-10T03:50:07">2026-09-10 03:50:07</time></td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <footer>Repeated alert IDs are grouped into a single endpoint pattern. Warnings are separate because their messages contain different capacity values.</footer>
+  </main>
+</body>
+</html>
